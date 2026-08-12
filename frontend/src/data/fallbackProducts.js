@@ -1,0 +1,102 @@
+import plantersImg from '../assets/category_planters.jpg';
+import plantsImg from '../assets/category_plants.jpg';
+import heroImg from '../assets/hero_banner.jpg';
+
+export const fallbackProducts = [
+  {
+    _id: "vtd-plnt-001",
+    name: "Succulent in Antique Floral Pot",
+    description: "Thriving Echeveria succulent presented in a hand-painted 19th-century style ceramic floral pot.",
+    price: 2500,
+    category: "Indoor Plants",
+    brand: "The Vintage Drop",
+    material: ["Ceramic", "Porcelain"],
+    occasion: ["Victorian", "Rustic"],
+    color: ["Multicolor", "White"],
+    size: ["Small (Under 6\")"],
+    images: [{ url: plantersImg, altText: "Succulent in Antique Floral Pot" }],
+    rating: 4.9,
+    countInStock: 5,
+    isFeatured: true
+  },
+  {
+    _id: "vtd-plnt-002",
+    name: "Jade Bonsai in Blue & White Planter",
+    description: "Miniature Jade plant (Crassula Ovata) planted in a genuine vintage blue and white Qing-style porcelain planter.",
+    price: 4200,
+    category: "Indoor Plants",
+    brand: "The Vintage Drop",
+    material: ["Porcelain"],
+    occasion: ["Art Deco", "Bohemian"],
+    color: ["Blue & White"],
+    size: ["Medium (6-12\")"],
+    images: [{ url: plantsImg, altText: "Jade Bonsai in Blue & White Planter" }],
+    rating: 5.0,
+    countInStock: 2,
+    isFeatured: true
+  },
+  {
+    _id: "vtd-pot-001",
+    name: "Victorian Brass Embossed Planter",
+    description: "Authentic aged brass pedestal planter with intricate lion head handles and embossed scrollwork.",
+    price: 5800,
+    category: "Vintage Planters",
+    brand: "The Vintage Drop",
+    material: ["Brass"],
+    occasion: ["Victorian"],
+    color: ["Gold"],
+    size: ["Medium (6-12\")"],
+    images: [{ url: heroImg, altText: "Victorian Brass Embossed Planter" }],
+    rating: 4.8,
+    countInStock: 3,
+    isFeatured: true
+  },
+  {
+    _id: "vtd-succ-001",
+    name: "Blooming Haworthia in Ceramic Teapot",
+    description: "Zebra Haworthia planted inside a charming vintage English tea jug planter with floral decal.",
+    price: 1800,
+    category: "Succulents & Cacti",
+    brand: "The Vintage Drop",
+    material: ["Ceramic"],
+    occasion: ["Rustic", "Bohemian"],
+    color: ["Multicolor", "Earthy Tones"],
+    size: ["Small (Under 6\")"],
+    images: [{ url: plantersImg, altText: "Blooming Haworthia in Ceramic Teapot" }],
+    rating: 4.7,
+    countInStock: 8,
+    isFeatured: false
+  },
+  {
+    _id: "vtd-deco-001",
+    name: "Art Deco Novelty Owl Planter",
+    description: "1930s-inspired ceramic owl planter with vibrant hand-painted glaze details.",
+    price: 3200,
+    category: "Antique Décor",
+    brand: "The Vintage Drop",
+    material: ["Ceramic"],
+    occasion: ["Art Deco"],
+    color: ["Multicolor"],
+    size: ["Medium (6-12\")"],
+    images: [{ url: plantsImg, altText: "Art Deco Novelty Owl Planter" }],
+    rating: 4.9,
+    countInStock: 4,
+    isFeatured: true
+  },
+  {
+    _id: "vtd-wall-001",
+    name: "Ornate Wall Vase & Ivy Bundle",
+    description: "Carved stone-finish wall pocket planter with live trailing English Ivy plant.",
+    price: 3600,
+    category: "Wall Vases & Hangings",
+    brand: "The Vintage Drop",
+    material: ["Clay", "Terracotta"],
+    occasion: ["Rustic", "Bohemian"],
+    color: ["Earthy Tones"],
+    size: ["Medium (6-12\")"],
+    images: [{ url: heroImg, altText: "Ornate Wall Vase & Ivy Bundle" }],
+    rating: 4.8,
+    countInStock: 6,
+    isFeatured: false
+  }
+];

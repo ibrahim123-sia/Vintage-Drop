@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import axios from "axios";
 
+import { fallbackProducts } from "../../data/fallbackProducts";
+
 const NewArrivals = () => {
   const scrollRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -10,7 +12,7 @@ const NewArrivals = () => {
   const [scrollStart, setScrollStart] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [newArrivals, setNewArrivals] = useState([]);
+  const [newArrivals, setNewArrivals] = useState(fallbackProducts);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,11 +24,14 @@ const NewArrivals = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/products/new-arrivals`
         );
-        setNewArrivals(Array.isArray(response.data) ? response.data : []);
-      } catch (error) {
-        console.error("Error fetching new arrivals:", error);
-        setError(error.message || "Failed to load new arrivals");
-        setNewArrivals([]);
+        if (Array.isArray(response.data) && response.data.length > 0) {
+          setNewArrivals(response.data);
+        } else {
+          setNewArrivals(fallbackProducts);
+        }
+      } catch (err) {
+        console.error("Error fetching new arrivals, using fallback:", err);
+        setNewArrivals(fallbackProducts);
       } finally {
         setLoading(false);
       }
@@ -80,14 +85,14 @@ const NewArrivals = () => {
       enabled ? "bg-white text-vintage-gold border border-vintage-sand hover:border-vintage-gold" : "bg-vintage-sand/40 text-vintage-umber/30 cursor-not-allowed"
     } transition-colors duration-200`;
 
-  if (loading || error || !newArrivals || newArrivals.length === 0) {
+  const displayArrivals = (newArrivals && newArrivals.length > 0) ? newArrivals : fallbackProducts;
+
+  if (loading && displayArrivals.length === 0) {
     return (
       <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="font-display text-3xl md:text-4xl text-vintage-obsidian mb-4">New Arrivals</h2>
-          {loading && <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-vintage-gold mx-auto"></div>}
-          {error && <p className="text-red-600">Error: {error}</p>}
-          {!loading && !error && <p className="text-vintage-umber/60">No new arrivals available at the moment.</p>}
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-vintage-gold mx-auto"></div>
         </div>
       </section>
     );
@@ -120,7 +125,7 @@ const NewArrivals = () => {
           onMouseUp={handleMouseUpOrLeave}
           onMouseLeave={handleMouseUpOrLeave}
         >
-          {newArrivals.map((product) => {
+          {displayArrivals.map((product) => {
             const productId = product?._id;
             if (!productId) return null;
             const mainImage = product.images?.[0] || {};

@@ -80,12 +80,14 @@ export const fetchSimilarProducts = createAsyncThunk(
   }
 );
 
+import { fallbackProducts } from "../../data/fallbackProducts";
+
 const productsSlice = createSlice({
   name: "products",
   initialState: {
-    products: [],
+    products: fallbackProducts,
     selectedProduct: null, //store detail of single product
-    similarProducts: [],
+    similarProducts: fallbackProducts.slice(0, 4),
     loading: false,
     error: null,
     filters: {
@@ -126,27 +128,39 @@ const productsSlice = createSlice({
     builder
       //handle fetching product with filter
       .addCase(fetchProductsByFilters.pending, (state) => {
-        (state.loading = true), (state.error = null);
+        state.loading = true;
+        state.error = null;
       })
       .addCase(fetchProductsByFilters.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = Array.isArray(action.payload) ? action.payload : [];
+        if (Array.isArray(action.payload) && action.payload.length > 0) {
+          state.products = action.payload;
+        } else {
+          state.products = fallbackProducts;
+        }
       })
       .addCase(fetchProductsByFilters.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+        if (!state.products || state.products.length === 0) {
+          state.products = fallbackProducts;
+        }
       })
       //handle fetching single product detail
       .addCase(fetchProductDetails.pending, (state) => {
-        (state.loading = true), (state.error = null);
+        state.loading = true;
+        state.error = null;
       })
       .addCase(fetchProductDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.selectedProduct = action.payload;
+        state.selectedProduct = action.payload || fallbackProducts[0];
       })
       .addCase(fetchProductDetails.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+        if (!state.selectedProduct) {
+          state.selectedProduct = fallbackProducts[0];
+        }
       })
       //handle updating product
       .addCase(updateProduct.pending, (state) => {
