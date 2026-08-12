@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #F5F1E6;
 }
@@ -10,6 +14,90 @@ body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+::selection {
+  background-color: #D4AF37;
+  color: #0B0B0C;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F1E6;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #D4AF37;
+  border-radius: 9999px;
+  border: 2px solid #F5F1E6;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #C5A059;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #D4AF37 #F5F1E6;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.vintage-shimmer {
+  background: linear-gradient(90deg, rgba(232, 220, 200, 0.4) 25%, rgba(212, 175, 55, 0.25) 50%, rgba(232, 220, 200, 0.4) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+@keyframes ken-burns {
+  0% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1.18);
+  }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 18s ease-out infinite alternate;
+}
+
+@keyframes bounce-chevron {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+.animate-bounce-chevron {
+  animation: bounce-chevron 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vintage-shimmer,
+  .animate-ken-burns,
+  .animate-bounce-chevron {
+    animation: none !important;
+  }
 }
 
 h1, h2, h3, h4, .font-display {

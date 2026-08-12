@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
 import CartContents from "../Cart/CartContents";
 import { useNavigate } from "react-router-dom";
@@ -46,65 +47,75 @@ const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
   const subtotal = calculateSubtotal();
 
   return (
-    <>
-      <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out ${
-          drawerOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-      />
+    <AnimatePresence>
+      {drawerOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          />
 
-      <div
-        ref={drawerRef}
-        className={`fixed top-0 right-0 w-full sm:w-96 h-full bg-vintage-cream shadow-xl transform transition-all duration-300 ease-in-out flex flex-col z-50 ${
-          drawerOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex justify-between items-center p-6 border-b border-vintage-sand">
-          <h2 className="font-display text-xl text-vintage-obsidian">Your Bag</h2>
-          <button
-            onClick={toggleCartDrawer}
-            className="text-vintage-umber hover:text-vintage-gold transition-colors duration-200 p-1 rounded-full"
-            aria-label="Close cart"
+          <motion.div
+            ref={drawerRef}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 320, damping: 34 }}
+            className="fixed top-0 right-0 w-full sm:w-96 h-full bg-vintage-cream shadow-xl flex flex-col z-50"
           >
-            <IoMdClose className="h-6 w-6" />
-          </button>
-        </div>
-
-        <div className="flex-grow p-6 overflow-y-auto">
-          {cart?.products?.length > 0 ? (
-            <CartContents cart={cart} userId={userId} guestId={guestId} />
-          ) : (
-            <div className="h-full flex flex-col items-center justify-center text-center">
-              <p className="text-vintage-umber/60 mb-4 text-lg">Your bag is empty</p>
+            <div className="flex justify-between items-center p-6 border-b border-vintage-sand">
+              <h2 className="font-display text-xl text-vintage-obsidian">Your Bag</h2>
               <button
                 onClick={toggleCartDrawer}
-                className="text-vintage-gold hover:text-vintage-umber font-medium uppercase text-sm tracking-widest transition-colors duration-200"
+                className="text-vintage-umber hover:text-vintage-gold transition-colors duration-200 p-1 rounded-full"
+                aria-label="Close cart"
               >
-                Continue Shopping
+                <IoMdClose className="h-6 w-6" />
               </button>
             </div>
-          )}
-        </div>
 
-        {cart?.products?.length > 0 && (
-          <div className="p-6 border-t border-vintage-sand bg-vintage-cream sticky bottom-0">
-            <div className="flex justify-between mb-4">
-              <span className="text-vintage-umber/70">Subtotal</span>
-              <span className="font-medium text-vintage-obsidian">Rs. {subtotal}</span>
+            <div className="flex-grow p-6 overflow-y-auto">
+              {cart?.products?.length > 0 ? (
+                <CartContents cart={cart} userId={userId} guestId={guestId} />
+              ) : (
+                <div className="h-full flex flex-col items-center justify-center text-center">
+                  <p className="text-vintage-umber/60 mb-4 text-lg">Your bag is empty</p>
+                  <button
+                    onClick={toggleCartDrawer}
+                    className="text-vintage-gold hover:text-vintage-umber font-medium uppercase text-sm tracking-widest transition-colors duration-200"
+                  >
+                    Continue Shopping
+                  </button>
+                </div>
+              )}
             </div>
-            <button
-              onClick={handleCheckout}
-              className="w-full bg-vintage-obsidian hover:bg-vintage-gold text-vintage-cream py-3 rounded-sm font-medium uppercase text-sm tracking-widest transition-all duration-200"
-            >
-              Proceed to Checkout
-            </button>
-            <p className="text-xs text-vintage-umber/50 mt-3 text-center">
-              Shipping and payment calculated at checkout.
-            </p>
-          </div>
-        )}
-      </div>
-    </>
+
+            {cart?.products?.length > 0 && (
+              <div className="p-6 border-t border-vintage-sand bg-vintage-cream sticky bottom-0">
+                <div className="flex justify-between mb-4">
+                  <span className="text-vintage-umber/70">Subtotal</span>
+                  <span className="font-medium text-vintage-obsidian">Rs. {subtotal}</span>
+                </div>
+                <motion.button
+                  onClick={handleCheckout}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="w-full bg-vintage-obsidian hover:bg-vintage-gold text-vintage-cream py-3 rounded-sm font-medium uppercase text-sm tracking-widest transition-colors duration-200"
+                >
+                  Proceed to Checkout
+                </motion.button>
+                <p className="text-xs text-vintage-umber/50 mt-3 text-center">
+                  Shipping and payment calculated at checkout.
+                </p>
+              </div>
+            )}
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 

@@ -11,6 +11,7 @@ import TestimonialsSection from "../components/Common/TestimonialsSection";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { fetchProductsByFilters } from "../redux/slices/productSlice";
+import Reveal from "../components/Common/Reveal";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -43,12 +44,12 @@ const Home = () => {
       <GenderCollectionSection />
       <NewArrivals />
 
-      <div className="text-center py-4">
+      <Reveal className="text-center py-4">
         <h2 className="font-display text-3xl md:text-4xl text-vintage-obsidian mb-2 font-bold">Customer Favorite</h2>
         <div className="vintage-divider my-2">
           <span className="vintage-divider-mark">🌸</span>
         </div>
-      </div>
+      </Reveal>
 
       {bestSellerProduct ? (
         <ProductDetails productId={bestSellerProduct._id} />
@@ -57,10 +58,10 @@ const Home = () => {
       )}
 
       <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <Reveal className="text-center mb-12">
           <h2 className="font-display text-3xl sm:text-4xl text-vintage-obsidian font-bold">Trending Collection</h2>
           <p className="text-vintage-umber/70 text-sm mt-2">Discover curated plant and planter pairings for your home.</p>
-        </div>
+        </Reveal>
         <ProductGrid products={products} loading={loading} error={error} />
       </div>
 

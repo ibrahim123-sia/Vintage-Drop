@@ -1,4 +1,5 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { RiDeleteBin3Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import {
@@ -34,8 +35,17 @@ const CartContents = ({ cart, userId, guestId }) => {
 
   return (
     <div>
-      {cart.products.map((product, index) => (
-        <div key={index} className="flex items-start justify-between py-4 border-b border-vintage-sand">
+      <AnimatePresence initial={false}>
+        {cart.products.map((product, index) => (
+          <motion.div
+            key={`${product.productId}-${product.material || ""}-${product.size || ""}`}
+            layout
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, x: -24, transition: { duration: 0.2 } }}
+            transition={{ duration: 0.3, delay: index * 0.03 }}
+            className="flex items-start justify-between py-4 border-b border-vintage-sand"
+          >
           <div className="flex items-start">
             <img
               src={product.image}
@@ -94,8 +104,9 @@ const CartContents = ({ cart, userId, guestId }) => {
               <RiDeleteBin3Line className="h-5 w-5 mt-2 text-red-500 hover:text-red-700" />
             </button>
           </div>
-        </div>
-      ))}
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
   );
 };

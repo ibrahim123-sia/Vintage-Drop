@@ -2,11 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import featuredImg from '../../assets/hero_banner.jpg';
+import Reveal from "../Common/Reveal";
+import { scaleIn } from "../../utils/motion";
 
 const FeaturedCollection = () => {
   return (
     <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center bg-white border border-vintage-sand/50 rounded-3xl shadow-xl overflow-hidden">
+      <Reveal
+        as="div"
+        variants={scaleIn}
+        className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center bg-white border border-vintage-sand/50 rounded-3xl shadow-xl overflow-hidden"
+      >
         <div className="lg:w-1/2 p-8 md:p-12 lg:p-16 text-center lg:text-left">
           <span className="text-vintage-gold text-xs font-bold uppercase tracking-widest block mb-2">Exclusive Edition</span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-vintage-obsidian mb-6 leading-tight">
@@ -39,7 +45,7 @@ const FeaturedCollection = () => {
             loading="lazy"
           />
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };

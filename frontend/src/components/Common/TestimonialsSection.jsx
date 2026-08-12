@@ -1,5 +1,8 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FaStar, FaQuoteLeft } from "react-icons/fa";
+import Reveal from "./Reveal";
+import { fadeUp, staggerContainer } from "../../utils/motion";
 
 const reviews = [
   {
@@ -32,7 +35,7 @@ const TestimonialsSection = () => {
   return (
     <section className="py-16 md:py-24 bg-vintage-cream border-t border-b border-vintage-sand/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <Reveal className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-vintage-gold text-xs uppercase tracking-widest font-semibold">Client Stories</span>
           <h2 className="font-display text-3xl sm:text-4xl text-vintage-obsidian font-bold mt-1 mb-3">
             Loved By Vintage & Plant Enthusiasts
@@ -40,15 +43,23 @@ const TestimonialsSection = () => {
           <div className="vintage-divider my-3">
             <span className="vintage-divider-mark">✨</span>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={staggerContainer(0.15)}
+        >
           {reviews.map((rev) => (
-            <div
+            <motion.div
               key={rev.id}
-              className="bg-white p-8 rounded-sm border border-vintage-sand/80 shadow-sm hover:shadow-md hover:border-vintage-gold/60 transition-all duration-300 relative flex flex-col justify-between"
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              className="group bg-white p-8 rounded-sm border border-vintage-sand/80 shadow-sm hover:shadow-md hover:border-vintage-gold/60 transition-all duration-300 relative flex flex-col justify-between"
             >
-              <FaQuoteLeft className="text-vintage-gold/20 text-4xl absolute top-6 right-6" />
+              <FaQuoteLeft className="text-vintage-gold/20 text-4xl absolute top-6 right-6 transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110" />
               <div>
                 <div className="flex text-vintage-gold space-x-1 mb-4">
                   {[...Array(rev.rating)].map((_, i) => (
@@ -63,9 +74,9 @@ const TestimonialsSection = () => {
                 <h4 className="font-display font-bold text-vintage-obsidian text-base">{rev.name}</h4>
                 <p className="text-xs text-vintage-umber/60">{rev.location} · <span className="text-vintage-gold font-medium">{rev.product}</span></p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

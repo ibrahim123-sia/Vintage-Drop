@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { TbBrandMeta } from "react-icons/tb";
 import { IoLogoInstagram } from "react-icons/io";
 import { RiTwitterXLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Reveal from "./Reveal";
+import { staggerContainer, fadeUp } from "../../utils/motion";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -52,8 +55,14 @@ const Footer = () => {
 
   return (
     <footer className="bg-vintage-obsidian text-vintage-cream py-12">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-4 lg:px-0">
-        <div>
+      <motion.div
+        className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-4 lg:px-0"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+        variants={staggerContainer(0.12)}
+      >
+        <motion.div variants={fadeUp}>
           <h3 className="font-display text-lg mb-4">Join Our Newsletter</h3>
           <p className="text-vintage-cream/60 mb-4 text-sm">
             Be the first to hear about new arrivals, rare vintage finds, and exclusive drops.
@@ -68,23 +77,25 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="p-3 w-full text-sm bg-vintage-cream/10 border border-vintage-cream/20 rounded-l-sm focus:outline-none focus:ring-1 focus:ring-vintage-gold text-vintage-cream placeholder:text-vintage-cream/40"
+                className="p-3 w-full text-sm bg-vintage-cream/10 border border-vintage-cream/20 rounded-l-sm focus:outline-none focus:ring-2 focus:ring-vintage-gold focus:shadow-[0_0_16px_rgba(212,175,55,0.35)] transition-shadow duration-300 text-vintage-cream placeholder:text-vintage-cream/40"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <button
+              <motion.button
                 type="submit"
-                className="bg-vintage-gold text-vintage-obsidian px-4 py-3 text-sm font-medium rounded-r-sm hover:bg-vintage-cream transition-all disabled:opacity-70 flex-shrink-0 uppercase tracking-wide"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-vintage-gold text-vintage-obsidian px-4 py-3 text-sm font-medium rounded-r-sm hover:bg-vintage-cream transition-colors disabled:opacity-70 flex-shrink-0 uppercase tracking-wide"
                 disabled={loading}
               >
                 {loading ? "..." : "Join"}
-              </button>
+              </motion.button>
             </form>
           )}
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div variants={fadeUp}>
           <h3 className="font-display text-lg mb-4">Shop</h3>
           <ul className="space-y-3 text-vintage-cream/60">
             <li><Link to="/collections/all?category=Indoor Plants" className="hover:text-vintage-gold text-sm transition-colors duration-200 block">Indoor Plants</Link></li>
@@ -92,9 +103,9 @@ const Footer = () => {
             <li><Link to="/collections/all?category=Succulents %26 Cacti" className="hover:text-vintage-gold text-sm transition-colors duration-200 block">Succulents & Cacti</Link></li>
             <li><Link to="/collections/all?category=Antique Décor" className="hover:text-vintage-gold text-sm transition-colors duration-200 block">Antique Décor</Link></li>
           </ul>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div variants={fadeUp}>
           <h3 className="font-display text-lg mb-4">Support</h3>
           <ul className="space-y-3 text-vintage-cream/60">
             <li><Link to="/contact" className="hover:text-vintage-gold text-sm transition-colors duration-200 block">Contact Us</Link></li>
@@ -102,9 +113,9 @@ const Footer = () => {
             <li><Link to="/faqs" className="hover:text-vintage-gold text-sm transition-colors duration-200 block">FAQs</Link></li>
             <li><Link to="/features" className="hover:text-vintage-gold text-sm transition-colors duration-200 block">Features</Link></li>
           </ul>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div variants={fadeUp}>
           <h3 className="font-display text-lg mb-4">Connect With Us</h3>
           <div className="flex items-center space-x-4 mb-6">
             <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-vintage-gold text-vintage-cream/60 transition-colors duration-200" aria-label="Facebook">
@@ -123,14 +134,14 @@ const Footer = () => {
             </a>
           </p>
           <p className="text-vintage-cream/40 text-sm mt-2">Mon-Sat: 10AM - 7PM</p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="container mx-auto mt-12 px-4 lg:px-0 border-t border-vintage-cream/10 pt-6">
+      <Reveal className="container mx-auto mt-12 px-4 lg:px-0 border-t border-vintage-cream/10 pt-6">
         <p className="text-vintage-cream/40 text-sm text-center">
           © 2026 The Vintage Drop. All Rights Reserved.
         </p>
-      </div>
+      </Reveal>
     </footer>
   );
 };

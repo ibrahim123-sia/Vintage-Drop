@@ -1,19 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import categoryPlanters from '../../assets/category_planters.jpg';
 import categoryPlants from '../../assets/category_plants.jpg';
+import Reveal from "../Common/Reveal";
+import { fadeUp, staggerContainer } from "../../utils/motion";
 
 const GenderCollectionSection = () => {
   return (
     <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10">
+        <Reveal className="text-center mb-10">
           <span className="block text-vintage-gold text-xs uppercase tracking-[0.3em] mb-3">Shop by Category</span>
           <h2 className="font-display text-3xl md:text-4xl text-vintage-obsidian">Plants to Planters</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          <div className="relative group overflow-hidden rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500">
+        </Reveal>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={staggerContainer(0.15)}
+        >
+          <motion.div variants={fadeUp} className="relative group overflow-hidden rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500">
             <img
               src={categoryPlanters}
               alt="Vintage Planters & Pots"
@@ -30,9 +39,9 @@ const GenderCollectionSection = () => {
                 Shop Planters →
               </Link>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative group overflow-hidden rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500">
+          <motion.div variants={fadeUp} className="relative group overflow-hidden rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500">
             <img
               src={categoryPlants}
               alt="Indoor Plants & Succulents"
@@ -49,8 +58,8 @@ const GenderCollectionSection = () => {
                 Explore Plants →
               </Link>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

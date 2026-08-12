@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FiSun, FiDroplet, FiHeart, FiShield } from "react-icons/fi";
+import Reveal from "./Reveal";
 
 const careTips = [
   {
@@ -38,7 +40,7 @@ const PlantCareSection = () => {
       <div className="absolute inset-0 opacity-10 bg-vintage-pattern-bg pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <Reveal className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-vintage-gold text-xs uppercase tracking-widest font-semibold">Botanical Wisdom</span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-vintage-cream mt-2 mb-4">
             Plant Care & Vintage Maintenance
@@ -49,7 +51,7 @@ const PlantCareSection = () => {
           <p className="text-vintage-cream/70 text-sm sm:text-base">
             Keeping your indoor greenery healthy and your vintage ceramic containers radiant with simple expert care steps.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Tabs */}
@@ -58,16 +60,19 @@ const PlantCareSection = () => {
               const TabIcon = tip.icon;
               const isActive = activeTab === tip.id;
               return (
-                <button
+                <motion.button
                   key={tip.id}
                   onClick={() => setActiveTab(tip.id)}
-                  className={`w-full text-left p-5 rounded-sm transition-all duration-300 flex items-center space-x-4 border ${
+                  animate={{ x: isActive ? 8 : 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                  whileHover={{ x: isActive ? 8 : 4 }}
+                  className={`w-full text-left p-5 rounded-sm transition-colors duration-300 flex items-center space-x-4 border ${
                     isActive
-                      ? "bg-vintage-cream text-vintage-obsidian border-vintage-gold shadow-lg transform translate-x-2"
+                      ? "bg-vintage-cream text-vintage-obsidian border-vintage-gold shadow-lg"
                       : "bg-vintage-obsidian/60 text-vintage-cream/80 border-vintage-cream/10 hover:border-vintage-gold/50 hover:bg-vintage-cream/5"
                   }`}
                 >
-                  <div className={`p-3 rounded-full ${isActive ? "bg-vintage-gold text-vintage-obsidian" : "bg-vintage-cream/10 text-vintage-gold"}`}>
+                  <div className={`p-3 rounded-full transition-colors duration-300 ${isActive ? "bg-vintage-gold text-vintage-obsidian" : "bg-vintage-cream/10 text-vintage-gold"}`}>
                     <TabIcon className="w-6 h-6" />
                   </div>
                   <div>
@@ -76,31 +81,41 @@ const PlantCareSection = () => {
                     </h3>
                     <p className={`text-xs ${isActive ? "text-vintage-obsidian/70" : "text-vintage-cream/60"}`}>{tip.subtitle}</p>
                   </div>
-                </button>
+                </motion.button>
               );
             })}
           </div>
 
           {/* Right Detailed Display Card */}
-          <div className="lg:col-span-8 bg-vintage-cream/5 border border-vintage-gold/30 rounded-sm p-8 sm:p-12 backdrop-blur-sm relative">
-            <div className="flex items-center space-x-4 mb-6">
-              <div className="p-4 rounded-full bg-vintage-gold text-vintage-obsidian">
-                <IconComponent className="w-8 h-8" />
-              </div>
-              <div>
-                <span className="text-vintage-gold text-xs uppercase tracking-widest font-semibold">{currentTip.subtitle}</span>
-                <h3 className="font-display text-2xl sm:text-3xl text-vintage-cream font-bold">{currentTip.title}</h3>
-              </div>
-            </div>
+          <div className="lg:col-span-8 bg-vintage-cream/5 border border-vintage-gold/30 rounded-sm p-8 sm:p-12 backdrop-blur-sm relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentTip.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="p-4 rounded-full bg-vintage-gold text-vintage-obsidian">
+                    <IconComponent className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <span className="text-vintage-gold text-xs uppercase tracking-widest font-semibold">{currentTip.subtitle}</span>
+                    <h3 className="font-display text-2xl sm:text-3xl text-vintage-cream font-bold">{currentTip.title}</h3>
+                  </div>
+                </div>
 
-            <p className="text-vintage-cream/90 text-base sm:text-lg leading-relaxed mb-8">
-              {currentTip.desc}
-            </p>
+                <p className="text-vintage-cream/90 text-base sm:text-lg leading-relaxed mb-8">
+                  {currentTip.desc}
+                </p>
 
-            <div className="p-4 bg-vintage-gold/10 border-l-4 border-vintage-gold rounded-r-sm text-vintage-gold text-xs sm:text-sm font-medium flex items-center space-x-3">
-              <FiShield className="w-5 h-5 flex-shrink-0" />
-              <span>{currentTip.tag}</span>
-            </div>
+                <div className="p-4 bg-vintage-gold/10 border-l-4 border-vintage-gold rounded-r-sm text-vintage-gold text-xs sm:text-sm font-medium flex items-center space-x-3">
+                  <FiShield className="w-5 h-5 flex-shrink-0" />
+                  <span>{currentTip.tag}</span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

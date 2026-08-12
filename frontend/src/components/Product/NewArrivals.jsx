@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import axios from "axios";
 
 import { fallbackProducts } from "../../data/fallbackProducts";
+import Reveal from "../Common/Reveal";
+import { fadeUp, staggerContainer } from "../../utils/motion";
 
 const NewArrivals = () => {
   const scrollRef = useRef(null);
@@ -101,7 +104,7 @@ const NewArrivals = () => {
   return (
     <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-vintage-sand/10">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-end mb-10">
+        <Reveal className="flex justify-between items-end mb-10">
           <div>
             <span className="text-vintage-gold text-xs font-bold uppercase tracking-widest">Fresh Collection</span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-vintage-obsidian mt-1">New Arrivals</h2>
@@ -115,15 +118,19 @@ const NewArrivals = () => {
               <FiChevronRight className="text-xl" />
             </button>
           </div>
-        </div>
+        </Reveal>
 
-        <div
+        <motion.div
           ref={scrollRef}
           className={`relative overflow-x-auto flex gap-6 pb-6 scrollbar-none ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUpOrLeave}
           onMouseLeave={handleMouseUpOrLeave}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={staggerContainer(0.08)}
         >
           {displayArrivals.map((product) => {
             const productId = product?._id;
@@ -131,7 +138,7 @@ const NewArrivals = () => {
             const mainImage = product.images?.[0] || {};
 
             return (
-              <div key={productId} className="flex-shrink-0 w-64 sm:w-72 relative group">
+              <motion.div key={productId} variants={fadeUp} className="flex-shrink-0 w-64 sm:w-72 relative group">
                 <div className="bg-white rounded-2xl overflow-hidden border border-vintage-sand/50 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <div className="relative overflow-hidden aspect-[4/5] bg-vintage-sand/20">
                     {mainImage.url ? (
@@ -157,10 +164,10 @@ const NewArrivals = () => {
                   </div>
                 </div>
                 <Link to={`/product/${productId}`} className="absolute inset-0 z-10" aria-label={`View ${product.name}`} />
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
         <div className="flex justify-center space-x-4 mt-6 md:hidden">
           <button onClick={() => scroll("left")} disabled={!canScrollLeft} className={arrowBtn(canScrollLeft)} aria-label="Scroll left">
             <FiChevronLeft className="text-xl" />
