@@ -50,43 +50,46 @@ const ProductGrid = ({ products, loading, error }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
       {productList.map((product) => (
         <Link
           key={product._id}
           to={`/product/${product._id}`}
           className="group block outline-none"
         >
-          <div className="bg-vintage-sand/40 rounded-sm overflow-hidden border border-transparent group-hover:border-vintage-gold transition-colors duration-300">
-            <div className="relative aspect-[4/5] overflow-hidden">
+          <div className="bg-white rounded-2xl overflow-hidden border border-vintage-sand/50 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div className="relative aspect-[4/5] overflow-hidden bg-vintage-sand/20">
               <img
                 src={product.images?.[0]?.url}
                 alt={product.images?.[0]?.altText || product.name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
                 loading="lazy"
               />
               {product.discountPrice && (
-                <div className="absolute top-3 left-3 bg-vintage-obsidian text-vintage-cream text-xs uppercase tracking-wide px-2 py-1 rounded-sm">
+                <div className="absolute top-3 left-3 bg-vintage-obsidian/90 backdrop-blur-sm text-vintage-gold text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm border border-vintage-gold/30">
                   Sale
                 </div>
               )}
             </div>
 
-            <div className="p-4 text-center">
-              <h3 className="font-display text-sm uppercase tracking-wide text-vintage-obsidian mb-1 line-clamp-1">
+            <div className="p-5 text-center">
+              <span className="text-[10px] font-bold text-vintage-gold uppercase tracking-widest block mb-1">
+                {product.category || "Vintage Find"}
+              </span>
+              <h3 className="font-display text-base font-bold tracking-wide text-vintage-obsidian mb-1.5 line-clamp-1 group-hover:text-vintage-gold transition-colors duration-200">
                 {product.name}
               </h3>
-              <p className="text-xs text-vintage-umber/60 mb-2">
+              <p className="text-xs text-vintage-umber/60 mb-3">
                 {product.material?.[0]}
                 {product.occasion?.[0] ? ` · ${product.occasion[0]}` : ""}
               </p>
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-2 pt-2 border-t border-vintage-sand/30">
                 {product.discountPrice && (
-                  <span className="text-xs text-vintage-umber/40 line-through">
+                  <span className="text-xs text-vintage-umber/40 line-through font-medium">
                     Rs. {Number(product.price || 0).toFixed(2)}
                   </span>
                 )}
-                <span className="text-vintage-gold font-medium">
+                <span className="text-vintage-gold font-bold text-sm">
                   Rs. {Number(product.discountPrice || product.price || 0).toFixed(2)}
                 </span>
               </div>

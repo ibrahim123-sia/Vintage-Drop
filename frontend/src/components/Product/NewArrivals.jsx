@@ -81,9 +81,9 @@ const NewArrivals = () => {
   const handleMouseUpOrLeave = () => setIsDragging(false);
 
   const arrowBtn = (enabled) =>
-    `p-2 rounded-full ${
-      enabled ? "bg-white text-vintage-gold border border-vintage-sand hover:border-vintage-gold" : "bg-vintage-sand/40 text-vintage-umber/30 cursor-not-allowed"
-    } transition-colors duration-200`;
+    `p-3 rounded-full ${
+      enabled ? "bg-white text-vintage-gold shadow-md border border-vintage-sand/60 hover:bg-vintage-gold hover:text-vintage-obsidian" : "bg-vintage-sand/20 text-vintage-umber/30 cursor-not-allowed"
+    } transition-all duration-300`;
 
   const displayArrivals = (newArrivals && newArrivals.length > 0) ? newArrivals : fallbackProducts;
 
@@ -99,15 +99,15 @@ const NewArrivals = () => {
   }
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-vintage-sand/10">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 relative">
-          <h2 className="font-display text-3xl md:text-4xl text-vintage-obsidian mb-4">New Arrivals</h2>
-          <p className="text-lg text-vintage-umber/70 max-w-2xl mx-auto">
-            The latest curated pieces added to our collection.
-          </p>
+        <div className="flex justify-between items-end mb-10">
+          <div>
+            <span className="text-vintage-gold text-xs font-bold uppercase tracking-widest">Fresh Collection</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-vintage-obsidian mt-1">New Arrivals</h2>
+          </div>
 
-          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:flex space-x-2">
+          <div className="hidden md:flex space-x-3">
             <button onClick={() => scroll("left")} disabled={!canScrollLeft} className={arrowBtn(canScrollLeft)} aria-label="Scroll left">
               <FiChevronLeft className="text-xl" />
             </button>
@@ -119,7 +119,7 @@ const NewArrivals = () => {
 
         <div
           ref={scrollRef}
-          className={`relative overflow-x-auto flex gap-6 pb-6 ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+          className={`relative overflow-x-auto flex gap-6 pb-6 scrollbar-none ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUpOrLeave}
@@ -132,33 +132,35 @@ const NewArrivals = () => {
 
             return (
               <div key={productId} className="flex-shrink-0 w-64 sm:w-72 relative group">
-                <div className="relative overflow-hidden rounded-sm aspect-[4/5] bg-vintage-sand/30">
-                  {mainImage.url ? (
-                    <img
-                      src={mainImage.url}
-                      alt={mainImage.altText || product.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      draggable="false"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-vintage-umber/40">No Image</span>
-                    </div>
-                  )}
-                </div>
-                <div className="mt-4 text-center">
-                  <Link to={`/product/${productId}`} className="block group-hover:text-vintage-gold transition-colors duration-200">
-                    <h3 className="font-display text-sm uppercase tracking-wide text-vintage-obsidian">{product.name}</h3>
-                    <p className="text-vintage-gold mt-1">Rs. {product.price?.toFixed(2)}</p>
-                  </Link>
+                <div className="bg-white rounded-2xl overflow-hidden border border-vintage-sand/50 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className="relative overflow-hidden aspect-[4/5] bg-vintage-sand/20">
+                    {mainImage.url ? (
+                      <img
+                        src={mainImage.url}
+                        alt={mainImage.altText || product.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                        draggable="false"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-vintage-umber/40">No Image</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-5 text-center">
+                    <span className="text-[10px] font-bold text-vintage-gold uppercase tracking-widest block mb-1">New Drop</span>
+                    <Link to={`/product/${productId}`} className="block group-hover:text-vintage-gold transition-colors duration-200">
+                      <h3 className="font-display text-base font-bold text-vintage-obsidian line-clamp-1">{product.name}</h3>
+                      <p className="text-vintage-gold font-bold text-sm mt-1">Rs. {Number(product.price || 0).toFixed(2)}</p>
+                    </Link>
+                  </div>
                 </div>
                 <Link to={`/product/${productId}`} className="absolute inset-0 z-10" aria-label={`View ${product.name}`} />
               </div>
             );
           })}
         </div>
-
         <div className="flex justify-center space-x-4 mt-6 md:hidden">
           <button onClick={() => scroll("left")} disabled={!canScrollLeft} className={arrowBtn(canScrollLeft)} aria-label="Scroll left">
             <FiChevronLeft className="text-xl" />

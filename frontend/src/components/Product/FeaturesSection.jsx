@@ -27,15 +27,15 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white p-8 rounded-sm border border-vintage-sand hover:border-vintage-gold transition-all duration-300 flex flex-col items-center text-center"
+              className="bg-white p-8 rounded-2xl border border-vintage-sand/50 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <div className="p-4 rounded-full mb-5 text-vintage-gold bg-vintage-sand/40">
+              <div className="p-4 rounded-full mb-5 text-vintage-gold bg-vintage-sand/30 group-hover:bg-vintage-gold group-hover:text-vintage-obsidian transition-colors duration-300 shadow-sm">
                 {feature.icon}
               </div>
-              <h4 className="text-sm font-semibold text-vintage-obsidian mb-3 uppercase tracking-widest">
+              <h4 className="text-sm font-bold text-vintage-obsidian mb-2 uppercase tracking-widest">
                 {feature.title}
               </h4>
-              <p className="text-vintage-umber/70 text-sm">{feature.description}</p>
+              <p className="text-vintage-umber/70 text-xs sm:text-sm">{feature.description}</p>
             </div>
           ))}
         </div>

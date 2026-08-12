@@ -32,34 +32,27 @@ const Navbar = () => {
   const toggleNavDrawer = () => setNavDrawerOpen(!navDrawerOpen);
   const toggleCartDrawer = () => setDrawerOpen(!drawerOpen);
 
-  const navLink = "text-vintage-umber hover:text-vintage-gold text-xs uppercase tracking-widest font-medium transition-colors duration-200 border-b-2 border-transparent hover:border-vintage-gold pb-1";
+  const navLink = "text-vintage-umber hover:text-vintage-gold text-xs uppercase tracking-wider font-semibold transition-all duration-200 border-b-2 border-transparent hover:border-vintage-gold pb-0.5 whitespace-nowrap";
 
   return (
     <>
-      <nav className="bg-vintage-cream sticky top-0 z-40 border-b border-vintage-sand/60 shadow-sm">
-        <div className="container mx-auto flex items-center justify-between py-4 px-4 sm:px-6">
-          {/* LEFT: Mobile Menu Button & Brand Logo */}
+      <nav className="bg-vintage-cream/90 backdrop-blur-md sticky top-0 z-40 border-b border-vintage-sand/50 shadow-sm">
+        <div className="container mx-auto flex items-center justify-between py-2.5 px-4 sm:px-8">
+          {/* LEFT: Logo + Brand Name (Single Line) */}
           <div className="flex items-center space-x-3">
-            <button onClick={toggleNavDrawer} className="md:hidden text-vintage-obsidian hover:text-vintage-gold p-1">
-              <HiBars3BottomRight className="w-7 h-7" />
+            <button onClick={toggleNavDrawer} className="lg:hidden text-vintage-obsidian hover:text-vintage-gold p-1" aria-label="Toggle Menu">
+              <HiBars3BottomRight className="w-6 h-6" />
             </button>
 
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-11 h-11 rounded-full overflow-hidden border border-vintage-gold/50 shadow-sm bg-vintage-obsidian p-0.5 flex-shrink-0 group-hover:border-vintage-gold transition-all duration-300">
-                <img src={logo} alt="The Vintage Drop" className="w-full h-full object-cover rounded-full" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display text-xl sm:text-2xl text-vintage-obsidian font-bold tracking-wider leading-none">
-                  THE VINTAGE DROP
-                </span>
-                <span className="text-[10px] text-vintage-gold font-medium tracking-widest uppercase mt-0.5">
-                  Antiques · Plants · Décor
-                </span>
-              </div>
+            <Link to="/" className="flex items-center space-x-2.5 whitespace-nowrap group">
+              <img src={logo} alt="The Vintage Drop" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-vintage-gold/60 shadow-sm group-hover:scale-105 transition-transform duration-300" />
+              <span className="font-display text-lg sm:text-xl font-bold tracking-widest text-vintage-obsidian uppercase whitespace-nowrap">
+                The Vintage Drop
+              </span>
             </Link>
           </div>
 
-          {/* CENTER: Inline Category Links (Desktop) */}
+          {/* CENTER: Navigation Category Links */}
           <div className="hidden lg:flex items-center space-x-6">
             {categoryLinks.map((link) => (
               <Link
@@ -72,47 +65,34 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* RIGHT: Search, User Profile, Admin, Cart */}
-          <div className="flex items-center space-x-4 sm:space-x-5">
-            <div className="hidden md:block w-48 lg:w-56">
+          {/* RIGHT: Search, Profile & Cart Icons */}
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className="hidden sm:block w-44 md:w-52">
               <SearchBar />
             </div>
 
             {user && user.role === "admin" && (
               <Link
                 to="/admin"
-                className="hidden sm:inline-block border border-vintage-gold text-vintage-gold hover:bg-vintage-gold hover:text-vintage-obsidian px-3 py-1 rounded-sm text-xs font-semibold uppercase tracking-widest transition-all duration-200"
+                className="hidden sm:inline-block bg-vintage-obsidian text-vintage-gold hover:bg-vintage-gold hover:text-vintage-obsidian px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-200 shadow-sm"
               >
                 Admin
               </Link>
             )}
 
-            <Link to="/profile" className="text-vintage-obsidian hover:text-vintage-gold transition-colors duration-200 p-1" title="Account">
-              <HiOutlineUser className="w-6 h-6" />
+            <Link to="/profile" className="text-vintage-obsidian hover:text-vintage-gold transition-colors duration-200 p-1.5 rounded-full hover:bg-vintage-sand/30" title="Account">
+              <HiOutlineUser className="w-5 h-5" />
             </Link>
 
-            <button onClick={toggleCartDrawer} className="relative text-vintage-obsidian hover:text-vintage-gold transition-colors duration-200 p-1" title="Bag">
-              <HiOutlineShoppingBag className="w-6 h-6" />
+            <button onClick={toggleCartDrawer} className="relative text-vintage-obsidian hover:text-vintage-gold transition-colors duration-200 p-1.5 rounded-full hover:bg-vintage-sand/30" title="Bag">
+              <HiOutlineShoppingBag className="w-5 h-5" />
               {cartItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-vintage-gold text-vintage-obsidian text-[10px] rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-sm">
+                <span className="absolute -top-0.5 -right-0.5 bg-vintage-gold text-vintage-obsidian text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold shadow-sm">
                   {cartItemCount}
                 </span>
               )}
             </button>
           </div>
-        </div>
-
-        {/* Medium screens secondary nav bar */}
-        <div className="hidden md:flex lg:hidden justify-center space-x-6 py-2.5 bg-vintage-sand/20 border-t border-vintage-sand/40">
-          {categoryLinks.map((link) => (
-            <Link
-              key={link.category}
-              to={`/collections/all?category=${encodeURIComponent(link.category)}`}
-              className={navLink}
-            >
-              {link.label}
-            </Link>
-          ))}
         </div>
       </nav>
 
