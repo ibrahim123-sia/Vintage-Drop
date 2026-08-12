@@ -35,10 +35,10 @@ const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
   const calculateSubtotal = () => {
     if (cart?.products && cart.products.length > 0) {
       const subtotal = cart.products.reduce(
-        (total, product) => total + product.price * product.quantity,
+        (total, product) => total + (Number(product.price) || 0) * (Number(product.quantity) || 1),
         0
       );
-      return subtotal.toFixed(2);
+      return Number(subtotal || 0).toFixed(2);
     }
     return "0.00";
   };

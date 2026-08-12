@@ -155,11 +155,11 @@ const ProductDetail = ({ productId }) => {
               <div className="flex items-center gap-3">
                 {selectedProduct.discountPrice && (
                   <span className="text-lg text-vintage-umber/40 line-through">
-                    Rs. {selectedProduct.price.toFixed(2)}
+                    Rs. {Number(selectedProduct.price || 0).toFixed(2)}
                   </span>
                 )}
                 <span className="text-2xl font-semibold text-vintage-gold">
-                  Rs. {(selectedProduct.discountPrice || selectedProduct.price).toFixed(2)}
+                  Rs. {Number(selectedProduct.discountPrice || selectedProduct.price || 0).toFixed(2)}
                 </span>
               </div>
 

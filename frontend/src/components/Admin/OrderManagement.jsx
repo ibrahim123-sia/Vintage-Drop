@@ -64,7 +64,7 @@ const OrderManagement = () => {
                     {order.user?.name || "N/A"}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-vintage-umber/70">
-                    Rs. {order.totalPrice.toFixed(2)}
+                    Rs. {Number(order.totalPrice || 0).toFixed(2)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <select
