@@ -27,10 +27,11 @@ const ProductDetail = ({ productId }) => {
 
   const productFetchId = productId || id;
 
-  const product =
-    selectedProduct ||
-    fallbackProducts.find((p) => p._id === productFetchId) ||
-    fallbackProducts[0];
+  const hasValidData = (p) => Boolean(p && p.name && p.images?.length > 0);
+
+  const product = hasValidData(selectedProduct)
+    ? selectedProduct
+    : fallbackProducts.find((p) => p._id === productFetchId) || fallbackProducts[0];
 
   useEffect(() => {
     if (productFetchId) {

@@ -92,12 +92,8 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* RIGHT: Search, Profile & Cart Icons */}
+          {/* RIGHT: Profile & Cart Icons */}
           <div className="flex items-center space-x-3 sm:space-x-4 shrink-0">
-            <div className="hidden sm:block w-32 lg:w-36 xl:w-48 2xl:w-52">
-              <SearchBar />
-            </div>
-
             {user && user.role === "admin" && (
               <Link
                 to="/admin"
