@@ -31,7 +31,9 @@ const ProductGrid = ({ products, loading, error }) => {
     );
   }
 
-  if (!products || products.length === 0) {
+  const productList = Array.isArray(products) ? products : [];
+
+  if (productList.length === 0) {
     return (
       <div className="flex justify-center items-center min-h-[300px] py-12">
         <div className="text-center">
@@ -49,7 +51,7 @@ const ProductGrid = ({ products, loading, error }) => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-      {products.map((product) => (
+      {productList.map((product) => (
         <Link
           key={product._id}
           to={`/product/${product._id}`}

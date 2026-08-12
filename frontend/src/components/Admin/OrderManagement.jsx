@@ -53,8 +53,8 @@ const OrderManagement = () => {
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-vintage-cream uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-vintage-sand">
-            {orders.length > 0 ? (
+          <tbody className="bg-white divide-y divide-vintage-sand/50">
+            {Array.isArray(orders) && orders.length > 0 ? (
               orders.map((order) => (
                 <tr key={order._id} className="hover:bg-vintage-cream transition-colors duration-150">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-vintage-obsidian">

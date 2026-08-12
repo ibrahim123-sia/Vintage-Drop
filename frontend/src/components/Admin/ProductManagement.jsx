@@ -58,8 +58,8 @@ const ProductManagement = () => {
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-vintage-umber uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-vintage-sand">
-              {products.length > 0 ? (
+            <tbody className="bg-white divide-y divide-vintage-sand/50">
+              {Array.isArray(products) && products.length > 0 ? (
                 products.map((product) => (
                   <tr key={product._id} className="hover:bg-vintage-cream transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">

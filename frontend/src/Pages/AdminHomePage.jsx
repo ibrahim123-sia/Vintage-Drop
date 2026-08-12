@@ -73,7 +73,7 @@ const AdminHomePage = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.length > 0 ? (
+              {Array.isArray(orders) && orders.length > 0 ? (
                 orders.map((order) => (
                   <tr key={order._id} className="border-b border-vintage-sand hover:bg-vintage-ivory">
                     <td className="p-4">{order._id}</td>

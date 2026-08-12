@@ -118,28 +118,36 @@ const UserManagement = () => {
               <th className="px-6 py-3 text-left text-xs font-medium text-vintage-cream uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-vintage-sand">
-            {users.map((user) => (
-              <tr key={user._id} className="hover:bg-vintage-cream transition-colors duration-150">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-vintage-obsidian">{user.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-vintage-umber/70">{user.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <select
-                    value={user.role}
-                    onChange={(e) => handleRoleChange(user._id, e.target.value)}
-                    className="bg-vintage-cream border border-vintage-sand text-vintage-umber text-sm rounded-sm focus:ring-vintage-gold focus:border-vintage-gold block p-2"
-                  >
-                    <option value="customer">Customer</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button onClick={() => handleDeleteUser(user._id)} className={buttonDanger}>
-                    Delete
-                  </button>
+          <tbody className="bg-white divide-y divide-vintage-sand/50">
+            {Array.isArray(users) && users.length > 0 ? (
+              users.map((user) => (
+                <tr key={user._id} className="hover:bg-vintage-cream transition-colors duration-150">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-vintage-obsidian">{user.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-vintage-umber/70">{user.email}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <select
+                      value={user.role}
+                      onChange={(e) => handleRoleChange(user._id, e.target.value)}
+                      className="bg-vintage-cream border border-vintage-sand text-vintage-umber text-sm rounded-sm focus:ring-vintage-gold focus:border-vintage-gold block p-2"
+                    >
+                      <option value="customer">Customer</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <button onClick={() => handleDeleteUser(user._id)} className={buttonDanger}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={4} className="px-6 py-4 text-center text-sm text-vintage-umber/60">
+                  No users found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
