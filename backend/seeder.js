@@ -20,7 +20,7 @@ const seedData = async () => {
     // create a default admin user
     const createdUser = await User.create({
       name: "The Vintage Drop Admin",
-      email: "developers@yesautomotiveservices.com",
+      email: "demo@thevintagedrop.pk",
       password: "123456",
       role: "admin",
       isVerified: true,
