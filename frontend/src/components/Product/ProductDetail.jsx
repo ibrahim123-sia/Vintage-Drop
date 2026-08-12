@@ -9,6 +9,7 @@ import {
   fetchSimilarProducts,
 } from "../../redux/slices/productSlice";
 import { addToCart } from "../../redux/slices/cartSlice";
+import { fallbackProducts } from "../../data/fallbackProducts";
 
 const ProductDetail = ({ productId }) => {
   const { id } = useParams();
@@ -26,6 +27,11 @@ const ProductDetail = ({ productId }) => {
 
   const productFetchId = productId || id;
 
+  const product =
+    selectedProduct ||
+    fallbackProducts.find((p) => p._id === productFetchId) ||
+    fallbackProducts[0];
+
   useEffect(() => {
     if (productFetchId) {
       dispatch(fetchProductDetails(productFetchId));
@@ -34,20 +40,20 @@ const ProductDetail = ({ productId }) => {
   }, [dispatch, productFetchId]);
 
   useEffect(() => {
-    if (selectedProduct?.images?.length > 0) {
-      setMainImage(selectedProduct.images[0].url);
+    if (product?.images?.length > 0) {
+      setMainImage(product.images[0].url);
     }
     setSelectedMaterial("");
     setSelectedSize("");
-  }, [selectedProduct]);
+  }, [product]);
 
   const handleQuantityChange = (action) => {
     if (action === "increment") setQuantity((prev) => prev + 1);
     if (action === "decrement" && quantity > 1) setQuantity((prev) => prev - 1);
   };
 
-  const needsMaterial = selectedProduct?.material?.length > 0;
-  const needsSize = selectedProduct?.size?.length > 0;
+  const needsMaterial = product?.material?.length > 0;
+  const needsSize = product?.size?.length > 0;
 
   const handleAddToCart = () => {
     if (needsMaterial && !selectedMaterial) {
@@ -90,15 +96,7 @@ const ProductDetail = ({ productId }) => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="flex justify-center items-center min-h-[50vh] text-red-600">
-        Error: {error}
-      </div>
-    );
-  }
-
-  if (!selectedProduct) {
+  if (!product) {
     return null;
   }
 
@@ -112,7 +110,7 @@ const ProductDetail = ({ productId }) => {
           {/* Image Gallery */}
           <div className="flex flex-col-reverse md:flex-row gap-6">
             <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
-              {selectedProduct.images?.map((image, index) => (
+              {product.images?.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setMainImage(image.url)}
@@ -135,8 +133,8 @@ const ProductDetail = ({ productId }) => {
             <div className="relative w-full">
               <div className="aspect-[4/5] bg-vintage-sand/30 rounded-sm overflow-hidden flex items-center justify-center">
                 <img
-                  src={mainImage || selectedProduct.images?.[0]?.url}
-                  alt={selectedProduct.name}
+                  src={mainImage || product.images?.[0]?.url}
+                  alt={product.name}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -147,24 +145,24 @@ const ProductDetail = ({ productId }) => {
           <div>
             <div className="mb-8">
               <p className="text-xs uppercase tracking-widest text-vintage-gold mb-2">
-                {selectedProduct.category}
+                {product.category}
               </p>
               <h1 className="font-display text-3xl md:text-4xl text-vintage-obsidian mb-3">
-                {selectedProduct.name}
+                {product.name}
               </h1>
               <div className="flex items-center gap-3">
-                {selectedProduct.discountPrice && (
+                {product.discountPrice && (
                   <span className="text-lg text-vintage-umber/40 line-through">
-                    Rs. {Number(selectedProduct.price || 0).toFixed(2)}
+                    Rs. {Number(product.price || 0).toFixed(2)}
                   </span>
                 )}
                 <span className="text-2xl font-semibold text-vintage-gold">
-                  Rs. {Number(selectedProduct.discountPrice || selectedProduct.price || 0).toFixed(2)}
+                  Rs. {Number(product.discountPrice || product.price || 0).toFixed(2)}
                 </span>
               </div>
 
               <p className="text-vintage-umber/80 mt-6 leading-relaxed">
-                {selectedProduct.description}
+                {product.description}
               </p>
             </div>
 
@@ -175,7 +173,7 @@ const ProductDetail = ({ productId }) => {
                   Material
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {selectedProduct.material?.map((option) => (
+                  {product.material?.map((option) => (
                     <button
                       key={option}
                       onClick={() => setSelectedMaterial(option)}
@@ -199,7 +197,7 @@ const ProductDetail = ({ productId }) => {
                   Size
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {selectedProduct.size?.map((option) => (
+                  {product.size?.map((option) => (
                     <button
                       key={option}
                       onClick={() => setSelectedSize(option)}
@@ -256,19 +254,19 @@ const ProductDetail = ({ productId }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <p className="text-sm text-vintage-umber/50 mb-1">Brand</p>
-                  <p className="text-vintage-umber">{selectedProduct.brand}</p>
+                  <p className="text-vintage-umber">{product.brand}</p>
                 </div>
                 <div>
                   <p className="text-sm text-vintage-umber/50 mb-1">Style</p>
-                  <p className="text-vintage-umber">{selectedProduct.occasion?.join(", ") || "—"}</p>
+                  <p className="text-vintage-umber">{product.occasion?.join(", ") || "—"}</p>
                 </div>
                 <div>
                   <p className="text-sm text-vintage-umber/50 mb-1">Color</p>
-                  <p className="text-vintage-umber">{selectedProduct.color?.join(", ") || "—"}</p>
+                  <p className="text-vintage-umber">{product.color?.join(", ") || "—"}</p>
                 </div>
                 <div>
                   <p className="text-sm text-vintage-umber/50 mb-1">Collection</p>
-                  <p className="text-vintage-umber">{selectedProduct.collections}</p>
+                  <p className="text-vintage-umber">{product.collections}</p>
                 </div>
               </div>
             </div>

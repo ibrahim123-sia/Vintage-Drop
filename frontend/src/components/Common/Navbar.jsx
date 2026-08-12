@@ -52,7 +52,7 @@ const Navbar = () => {
         }`}
       >
         <div
-          className={`container mx-auto flex items-center justify-between px-4 sm:px-8 transition-all duration-300 ${
+          className={`container mx-auto flex items-center justify-between gap-2 px-4 sm:px-8 transition-all duration-300 ${
             scrolled ? "h-14" : "h-16"
           }`}
         >
@@ -79,12 +79,12 @@ const Navbar = () => {
           </div>
 
           {/* CENTER: Navigation Category Links */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-5 flex-1 min-w-0 overflow-x-auto scrollbar-none">
             {categoryLinks.map((link) => (
               <Link
                 key={link.category}
                 to={`/collections/all?category=${encodeURIComponent(link.category)}`}
-                className="group/link relative text-vintage-umber hover:text-vintage-gold text-xs uppercase tracking-wider font-semibold transition-colors duration-200 whitespace-nowrap pb-1"
+                className="group/link relative text-vintage-umber hover:text-vintage-gold text-xs uppercase tracking-normal font-semibold transition-colors duration-200 whitespace-nowrap pb-1 shrink-0"
               >
                 {link.label}
                 <span className="absolute left-0 -bottom-0.5 h-[2px] w-full bg-vintage-gold origin-left scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out" />
@@ -93,8 +93,8 @@ const Navbar = () => {
           </div>
 
           {/* RIGHT: Search, Profile & Cart Icons */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <div className="hidden sm:block w-44 md:w-52">
+          <div className="flex items-center space-x-3 sm:space-x-4 shrink-0">
+            <div className="hidden sm:block w-32 lg:w-36 xl:w-48 2xl:w-52">
               <SearchBar />
             </div>
 
