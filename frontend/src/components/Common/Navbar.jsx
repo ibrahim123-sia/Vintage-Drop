@@ -36,7 +36,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-vintage-cream/90 backdrop-blur-md sticky top-0 z-40 border-b border-vintage-sand/50 shadow-sm">
+      <nav className="bg-vintage-cream/95 backdrop-blur-md border-b border-vintage-sand/50">
         <div className="container mx-auto flex items-center justify-between py-2.5 px-4 sm:px-8">
           {/* LEFT: Logo + Brand Name (Single Line) */}
           <div className="flex items-center space-x-3">

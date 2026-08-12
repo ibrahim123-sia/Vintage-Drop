@@ -52,6 +52,22 @@ export const fallbackProducts = [
     isFeatured: true
   },
   {
+    _id: "vtd-pot-002",
+    name: "Hand-Painted Floral Ceramic Pot",
+    description: "Hand-crafted ceramic planter featuring traditional botanical enamel glaze.",
+    price: 3400,
+    category: "Vintage Planters",
+    brand: "The Vintage Drop",
+    material: ["Ceramic"],
+    occasion: ["Rustic"],
+    color: ["Multicolor"],
+    size: ["Medium (6-12\")"],
+    images: [{ url: plantersImg, altText: "Hand-Painted Floral Ceramic Pot" }],
+    rating: 4.9,
+    countInStock: 6,
+    isFeatured: true
+  },
+  {
     _id: "vtd-succ-001",
     name: "Blooming Haworthia in Ceramic Teapot",
     description: "Zebra Haworthia planted inside a charming vintage English tea jug planter with floral decal.",
@@ -66,6 +82,22 @@ export const fallbackProducts = [
     rating: 4.7,
     countInStock: 8,
     isFeatured: false
+  },
+  {
+    _id: "vtd-succ-002",
+    name: "Golden Barrel Cactus in Terracotta Bowl",
+    description: "Lush flowering cactus set inside an authentic antique rustic clay bowl.",
+    price: 2100,
+    category: "Succulents & Cacti",
+    brand: "The Vintage Drop",
+    material: ["Terracotta"],
+    occasion: ["Rustic"],
+    color: ["Terracotta"],
+    size: ["Small (Under 6\")"],
+    images: [{ url: plantsImg, altText: "Golden Barrel Cactus in Terracotta Bowl" }],
+    rating: 4.8,
+    countInStock: 5,
+    isFeatured: true
   },
   {
     _id: "vtd-deco-001",
@@ -84,11 +116,59 @@ export const fallbackProducts = [
     isFeatured: true
   },
   {
+    _id: "vtd-deco-002",
+    name: "Carved Swan Porcelain Planter",
+    description: "Elegant vintage swan porcelain centerpiece planter with gold leaf beak accents.",
+    price: 4900,
+    category: "Antique Décor",
+    brand: "The Vintage Drop",
+    material: ["Porcelain"],
+    occasion: ["Victorian"],
+    color: ["White", "Gold"],
+    size: ["Medium (6-12\")"],
+    images: [{ url: plantersImg, altText: "Carved Swan Porcelain Planter" }],
+    rating: 5.0,
+    countInStock: 2,
+    isFeatured: true
+  },
+  {
+    _id: "vtd-bndl-001",
+    name: "Curated Trio: Mini Succulents & Brass Pot",
+    description: "Set of three mini succulents paired with an antique brass display tray.",
+    price: 6500,
+    category: "Curated Bundles",
+    brand: "The Vintage Drop",
+    material: ["Brass", "Ceramic"],
+    occasion: ["Mid-Century"],
+    color: ["Gold", "Green"],
+    size: ["Medium (6-12\")"],
+    images: [{ url: heroImg, altText: "Curated Trio: Mini Succulents & Brass Pot" }],
+    rating: 4.9,
+    countInStock: 3,
+    isFeatured: true
+  },
+  {
+    _id: "vtd-bndl-002",
+    name: "Botanical Living Room Duo",
+    description: "Pothos vine plant paired with a vintage ceramic tea jug planter.",
+    price: 5200,
+    category: "Curated Bundles",
+    brand: "The Vintage Drop",
+    material: ["Ceramic"],
+    occasion: ["Bohemian"],
+    color: ["Multicolor"],
+    size: ["Medium (6-12\")"],
+    images: [{ url: plantsImg, altText: "Botanical Living Room Duo" }],
+    rating: 4.8,
+    countInStock: 4,
+    isFeatured: true
+  },
+  {
     _id: "vtd-wall-001",
     name: "Ornate Wall Vase & Ivy Bundle",
     description: "Carved stone-finish wall pocket planter with live trailing English Ivy plant.",
     price: 3600,
-    category: "Wall Vases & Hangings",
+    category: "Wall Vases",
     brand: "The Vintage Drop",
     material: ["Clay", "Terracotta"],
     occasion: ["Rustic", "Bohemian"],
@@ -98,5 +178,21 @@ export const fallbackProducts = [
     rating: 4.8,
     countInStock: 6,
     isFeatured: false
+  },
+  {
+    _id: "vtd-wall-002",
+    name: "Victorian Brass Hanging Planter",
+    description: "Suspended brass chain planter bowl ideal for trailing indoor vines.",
+    price: 4100,
+    category: "Wall Vases",
+    brand: "The Vintage Drop",
+    material: ["Brass"],
+    occasion: ["Victorian"],
+    color: ["Gold"],
+    size: ["Medium (6-12\")"],
+    images: [{ url: plantersImg, altText: "Victorian Brass Hanging Planter" }],
+    rating: 4.9,
+    countInStock: 4,
+    isFeatured: true
   }
 ];

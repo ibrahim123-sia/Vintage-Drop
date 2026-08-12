@@ -136,7 +136,14 @@ const productsSlice = createSlice({
         if (Array.isArray(action.payload) && action.payload.length > 0) {
           state.products = action.payload;
         } else {
-          state.products = fallbackProducts;
+          const filterArg = action.meta?.arg || {};
+          let filtered = fallbackProducts;
+          if (filterArg.category && filterArg.category !== "all") {
+            const catLower = filterArg.category.toLowerCase();
+            const matched = fallbackProducts.filter(p => p.category?.toLowerCase().includes(catLower) || catLower.includes(p.category?.toLowerCase()));
+            if (matched.length > 0) filtered = matched;
+          }
+          state.products = filtered;
         }
       })
       .addCase(fetchProductsByFilters.rejected, (state, action) => {
