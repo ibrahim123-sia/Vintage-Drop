@@ -52,7 +52,7 @@ const Navbar = () => {
         }`}
       >
         <div
-          className={`w-full flex items-center justify-between gap-2 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
+          className={`w-full flex items-center justify-between gap-4 lg:gap-8 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
             scrolled ? "h-14" : "h-16"
           }`}
         >
