@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiLoader, FiAlertCircle } from "react-icons/fi";
+import { FiLoader } from "react-icons/fi";
+import { fallbackProducts } from "../../data/fallbackProducts";
 
 const ProductGrid = ({ products, loading, error }) => {
   if (loading) {
@@ -14,40 +15,7 @@ const ProductGrid = ({ products, loading, error }) => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="flex justify-center items-center min-h-[300px] py-12">
-        <div className="flex flex-col items-center text-red-600 max-w-md text-center">
-          <FiAlertCircle className="h-10 w-10 mb-4" />
-          <p className="text-lg mb-4">Error loading products: {error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-vintage-obsidian hover:bg-vintage-gold text-vintage-cream rounded-sm text-sm uppercase tracking-widest transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const productList = Array.isArray(products) ? products : [];
-
-  if (productList.length === 0) {
-    return (
-      <div className="flex justify-center items-center min-h-[300px] py-12">
-        <div className="text-center">
-          <p className="text-vintage-umber/60 text-lg mb-4">No products found</p>
-          <Link
-            to="/collections/all"
-            className="inline-block px-6 py-2 bg-vintage-obsidian hover:bg-vintage-gold text-vintage-cream rounded-sm text-sm uppercase tracking-widest transition-colors"
-          >
-            Browse All Products
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  const productList = (Array.isArray(products) && products.length > 0) ? products : fallbackProducts;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">

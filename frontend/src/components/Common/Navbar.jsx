@@ -36,17 +36,20 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-vintage-cream/95 backdrop-blur-md border-b border-vintage-sand/50">
-        <div className="container mx-auto flex items-center justify-between py-2.5 px-4 sm:px-8">
-          {/* LEFT: Logo + Brand Name (Single Line) */}
-          <div className="flex items-center space-x-3">
+      <div className="bg-vintage-obsidian text-vintage-cream text-[11px] py-1.5 px-4 text-center font-semibold uppercase tracking-widest border-b border-vintage-gold/20">
+        Free Shipping Across Pakistan on Orders Over Rs. 2,000 · Cash on Delivery
+      </div>
+      <nav className="bg-vintage-cream/95 backdrop-blur-md border-b border-vintage-sand/50 shadow-sm">
+        <div className="container mx-auto flex items-center justify-between h-16 px-4 sm:px-8">
+          {/* LEFT: Logo + Brand Name (Locked 1 Line) */}
+          <div className="flex items-center space-x-3 shrink-0">
             <button onClick={toggleNavDrawer} className="lg:hidden text-vintage-obsidian hover:text-vintage-gold p-1" aria-label="Toggle Menu">
               <HiBars3BottomRight className="w-6 h-6" />
             </button>
 
-            <Link to="/" className="flex items-center space-x-2.5 whitespace-nowrap group">
+            <Link to="/" className="flex items-center space-x-2.5 shrink-0 group">
               <img src={logo} alt="The Vintage Drop" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-vintage-gold/60 shadow-sm group-hover:scale-105 transition-transform duration-300" />
-              <span className="font-display text-lg sm:text-xl font-bold tracking-widest text-vintage-obsidian uppercase whitespace-nowrap">
+              <span className="font-display text-base sm:text-xl font-bold tracking-widest text-vintage-obsidian uppercase whitespace-nowrap">
                 The Vintage Drop
               </span>
             </Link>
